@@ -213,71 +213,75 @@
 
   <script>
     (function(){
-     var games = {
-  "crowd city": { name: 'Crowd City', img: 'assets/block_blast_logo.webp', brand: 'Crowd City × Freecash' },
-  "royal match": { name: 'Royal Match', img: 'assets/roblox_logo.webp', brand: 'Royal Match × Freecash' },
-  "dice dreams": { name: 'Dice Dreams', img: 'assets/subway_surfers_logo.webp', brand: 'Dice Dreams × Freecash' }
-};
+      var games = {
+        "crowd city": { name: 'Crowd City', img: 'assets/block_blast_logo.webp', brand: 'Crowd City × Freecash' },
+        "royal match": { name: 'Royal Match', img: 'assets/roblox_logo.webp', brand: 'Royal Match × Freecash' },
+        "dice dreams": { name: 'Dice Dreams', img: 'assets/subway_surfers_logo.webp', brand: 'Dice Dreams × Freecash' }
+      };
 
-      var gameModal=document.getElementById('gameModal');
-      var tipOverlay=document.getElementById('tipOverlay');
-      var gameClose=document.getElementById('gameClose');
+      var gameModal = document.getElementById('gameModal');
+      var tipOverlay = document.getElementById('tipOverlay');
+      var gameClose = document.getElementById('gameClose');
 
       // Game card clicks
       document.querySelectorAll('.game-card').forEach(function(c){
-        c.addEventListener('click',function(){
-          var g=games[c.getAttribute('data-game')];
-          if(!g)return;
-          document.getElementById('modalGameImg').src=g.img;
-          document.getElementById('modalGameBrand').textContent=g.brand;
-          document.getElementById('modalGameName').textContent=g.name;
-          document.getElementById('modalGameName2').textContent=g.name;
-          document.getElementById('modalGameName3').textContent=g.name;
+        c.addEventListener('click', function(){
+          var g = games[c.getAttribute('data-game')];
+          if(!g) return;
+          document.getElementById('modalGameImg').src = g.img;
+          document.getElementById('modalGameBrand').textContent = g.brand;
+          document.getElementById('modalGameName').textContent = g.name;
+          document.getElementById('modalGameName2').textContent = g.name;
+          document.getElementById('modalGameName3').textContent = g.name;
           gameModal.classList.add('open');
-          document.body.style.overflow='hidden';
+          document.body.style.overflow = 'hidden';
         });
       });
 
       function closeGame(){
         gameModal.classList.remove('open');
-        document.body.style.overflow='';
+        document.body.style.overflow = '';
       }
 
-      gameClose.addEventListener('click',closeGame);
-      gameModal.addEventListener('click',function(e){if(e.target===gameModal)closeGame()});
+      gameClose.addEventListener('click', closeGame);
+      gameModal.addEventListener('click', function(e){ if(e.target === gameModal) closeGame() });
 
       function showTip(){
         closeGame();
         tipOverlay.classList.add('open');
-        document.body.style.overflow='hidden';
+        document.body.style.overflow = 'hidden';
       }
 
       function goToLink(){
         tipOverlay.classList.remove('open');
-        document.body.style.overflow='';
-        var u='click.html';
-        var s=new URLSearchParams(window.location.search).get('s1');
-        if(s)u+='?s1='+encodeURIComponent(s);
-        window.location.href=u;
+        document.body.style.overflow = '';
+        var u = 'click.html';
+        var s = new URLSearchParams(window.location.search).get('s1');
+        if(s) u += '?s1=' + encodeURIComponent(s);
+        window.location.href = u;
       }
 
       // Main CTA → pro-tip
-      document.getElementById('mainCta').addEventListener('click',showTip);
-      document.getElementById('mainCta').addEventListener('contextmenu',function(e){e.preventDefault()});
+      document.getElementById('mainCta').addEventListener('click', showTip);
+      document.getElementById('mainCta').addEventListener('contextmenu', function(e){e.preventDefault()});
 
       // Modal CTA → pro-tip
-      document.getElementById('modalCta').addEventListener('click',showTip);
-      document.getElementById('modalCta').addEventListener('contextmenu',function(e){e.preventDefault()});
+      document.getElementById('modalCta').addEventListener('click', showTip);
+      document.getElementById('modalCta').addEventListener('contextmenu', function(e){e.preventDefault()});
 
       // Pro-tip continue → redirect
-      document.getElementById('tipBtn').addEventListener('click',goToLink);
-      document.getElementById('tipBtn').addEventListener('contextmenu',function(e){e.preventDefault()});
+      document.getElementById('tipBtn').addEventListener('click', goToLink);
+      document.getElementById('tipBtn').addEventListener('contextmenu', function(e){e.preventDefault()});
 
       // ESC closes
-      document.addEventListener('keydown',function(e){
-        if(e.key==='Escape'){
-          if(tipOverlay.classList.contains('open')){tipOverlay.classList.remove('open');document.body.style.overflow=''}
-          else if(gameModal.classList.contains('open'))closeGame();
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){
+          if(tipOverlay.classList.contains('open')){
+            tipOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+          } else if(gameModal.classList.contains('open')) {
+            closeGame();
+          }
         }
       });
     })();
